@@ -26,3 +26,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Scraping inspection
+workana_page.html
+workana_page.txt
+workana_page.png
