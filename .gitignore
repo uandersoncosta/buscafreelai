@@ -31,3 +31,6 @@ Thumbs.db
 workana_page.html
 workana_page.txt
 workana_page.png
+
+#database
+*.db
