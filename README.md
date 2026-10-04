@@ -1,4 +1,4 @@
-# WorkMatch AI
+# Busca-Freelaí
 
 Sistema de recomendação de projetos da Workana baseado no perfil profissional do usuário.
 
