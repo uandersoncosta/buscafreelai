@@ -1,11 +1,24 @@
-from pydantic import BaseModel, HttpUrl
+from sqlalchemy import JSON, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.database.db import Base
 
 
-class WorkanaProject(BaseModel):
-    title: str
-    url: HttpUrl
-    conteudo: str
-    qnt_propostas: int | None = None
-    valor: str | None = None
-    skills: list[str] = []
-    analise: str | None = None
+class Project(Base):
+    __tablename__ = "projects"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    title: Mapped[str] = mapped_column(String(255))
+
+    url: Mapped[str] = mapped_column(String(500),unique=True,nullable=False,)
+
+    conteudo: Mapped[str] = mapped_column(Text)
+
+    qnt_propostas: Mapped[int | None] = mapped_column(Integer,nullable=True,)
+
+    valor: Mapped[str | None] = mapped_column(String(100),nullable=True,)
+
+    skills: Mapped[list] = mapped_column(JSON)
+
+    analise: Mapped[str | None] = mapped_column(Text,nullable=True,)
