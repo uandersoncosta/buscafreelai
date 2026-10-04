@@ -1,9 +1,9 @@
 from playwright.async_api import async_playwright
-from app.schemas.project import WorkanaProject
+from app.schemas.project import Project
 
 WORKANA_URL = "https://www.workana.com/pt/jobs"
 
-async def search_workana_projects(query: str,) -> list[WorkanaProject]:
+async def search_workana_projects(query: str,) -> list[Project]:
   async with async_playwright() as playwright:
     browser = await playwright.chromium.launch(
       headless=False
@@ -27,7 +27,7 @@ async def search_workana_projects(query: str,) -> list[WorkanaProject]:
 
     project_cards = page.locator(".project-item.js-project")
 
-    projects: list[WorkanaProject] = []
+    projects: list[Project] = []
 
     total_projects = await project_cards.count()
 
@@ -65,7 +65,7 @@ async def search_workana_projects(query: str,) -> list[WorkanaProject]:
           )
 
       projects.append(
-          WorkanaProject(
+          Project(
               title=title,
               url=url,
               conteudo=content,
