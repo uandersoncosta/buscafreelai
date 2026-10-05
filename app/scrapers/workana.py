@@ -1,5 +1,5 @@
 from playwright.async_api import async_playwright
-from app.schemas.project import Project
+from app.models.project import Project
 
 WORKANA_URL = "https://www.workana.com/pt/jobs"
 

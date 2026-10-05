@@ -1,11 +1,12 @@
 from sqlalchemy.orm import Session
 
-from app.schemas.profile import Profile
+from app.models.profile import Profile
+from app.schemas.UserProfile import UserProfile
 
 
 def create_profile(
     db: Session,
-    profile_data: Profile,
+    profile_data: UserProfile,
 ) -> Profile:
 
     profile = Profile(
