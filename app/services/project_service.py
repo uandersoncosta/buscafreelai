@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.schemas.project import Project
+from app.models.project import Project
 
 
 def save_project(db: Session,project_data: Project,):

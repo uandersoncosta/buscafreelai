@@ -1,9 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.schemas.match import Match
-from app.schemas.profile import Profile
-from app.schemas.project import Project
+from app.models.match import Match
+from app.models.profile import Profile
+from app.models.project import Project
 from app.services.ai_service import analyze_project
 
 

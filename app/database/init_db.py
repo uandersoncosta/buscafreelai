@@ -1,6 +1,6 @@
 from app.database.db import Base, engine
-from app.schemas.profile import Profile
-from app.schemas.project import Project
+from app.models.profile import Profile
+from app.models.project import Project
 
 
 def main():
