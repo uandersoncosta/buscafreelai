@@ -7,7 +7,7 @@ from app.models.project import Project
 from app.services.ai_service import analyze_project
 
 
-def save_match(db: Session, profile_id: int, project_id: int, score: int, analise: str,) -> Match:
+def save_match(db: Session, profile_id: int, project_id: int, score: int, analise: str) -> Match:
 
     existing_match = db.scalar(
         select(Match).where(
@@ -39,7 +39,7 @@ def save_match(db: Session, profile_id: int, project_id: int, score: int, analis
     return match
 
 
-def analyze_and_save_match(db: Session, profile_id: int, project_id: int,) -> Match:
+def analyze_and_save_match(db: Session, profile_id: int, project_id: int) -> Match:
     profile = db.get(Profile, profile_id)
 
     if not profile:
@@ -66,3 +66,35 @@ def analyze_and_save_match(db: Session, profile_id: int, project_id: int,) -> Ma
         score=score,
         analise=analise,
     )
+    
+def validate_matching_profile(db: Session, profile_id: int) -> Profile:
+
+    profile = db.get(Profile, profile_id)
+
+    if not profile:
+        raise ValueError(
+            f"Perfil {profile_id} não encontrado."
+        )
+
+    return profile
+
+def process_saved_projects(db:Session, profile_id:int) -> list[Match]:
+    
+    profile = validate_matching_profile(
+        db=db,
+        profile_id=profile_id
+    )
+    
+    projects = db.scalars(select(Project)).all()
+    
+    matches = []
+    
+    for project in projects:
+        match = analyze_and_save_match(
+            db=db,
+            profile_id=profile.id,
+            project_id=project.id
+        )
+        matches.append(match)
+
+    return matches
