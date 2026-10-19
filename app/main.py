@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.routes.profiles import router as profiles_router
+from app.api.routes.matching import router as matching_router
 
 app = FastAPI(
     title="Busca-Freelaí",
@@ -8,3 +9,4 @@ app = FastAPI(
 )
 
 app.include_router(profiles_router)
+app.include_router(matching_router)
