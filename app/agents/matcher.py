@@ -7,17 +7,26 @@ from app.scrapers.workana import search_workana_projects
 load_dotenv()
 
 def search_workana(query: str) -> list[dict]:
-  """
-  Pesquisa projetos na Workana usando uma query.
-  """
-  import asyncio
+    """
+    Pesquisa projetos na Workana usando uma query.
+    """
+    import asyncio
 
-  projects = asyncio.run(search_workana_projects(query))
+    projects = asyncio.run(
+        search_workana_projects(query)
+    )
 
-  return [
-    project.model_dump(mode="json")
-    for project in projects
-  ]
+    return [
+        {
+            "title": project.title,
+            "url": str(project.url),
+            "conteudo": project.conteudo,
+            "qnt_propostas": project.qnt_propostas,
+            "valor": project.valor,
+            "skills": project.skills,
+        }
+        for project in projects
+    ]
 
 
 agent = Agent(
